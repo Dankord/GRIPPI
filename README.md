@@ -11,10 +11,8 @@ A web-based geospatial crime pattern analytics support system designed to suppor
 - [Prerequisites](#prerequisites)
 - [Installation and Setup](#installation-and-setup)
 - [PostgreSQL and PostGIS Setup](#postgresql-and-postgis-setup)
-- [Laravel Environment Configuration](#laravel-environment-configuration)
 - [Install Dependencies](#install-dependencies)
 - [Run the Application](#run-the-application)
-- [Development Workflow](#development-workflow)
 - [Troubleshooting](#troubleshooting)
 
 ## Project Overview
