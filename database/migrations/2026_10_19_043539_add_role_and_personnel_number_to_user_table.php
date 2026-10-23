@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('role')->default('officer');
             $table->string('personnel_number')->nullable()->unique();
-            $table->string('station_id')->nullable()->constrained('stations')->restrictOnDelete();
+            $table->foreignId('station_id')->nullable()->constrained('stations')->restrictOnDelete();
             $table->softDeletes();
         });
     }
