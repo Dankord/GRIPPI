@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 
 class Crime extends Model
 {
@@ -30,7 +32,7 @@ class Crime extends Model
 
     public function crimeCategory(): BelongsTo
     {
-        return $this->belongsTo(CrimeCategory::class);
+        return $this->belongsTo(CrimeCategory::class, 'crime_category_id')->withTrashed();
     }
 
     public function station(): BelongsTo
@@ -41,5 +43,13 @@ class Crime extends Model
     public function reportedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'reported_by_id');
+    }
+
+    public function scopeOccuredBetween(Builder $query, Carbon $start, Carbon $end)
+    {
+        return $query->whereBetween(
+            'occured_at',
+            [$start, $end]
+        );
     }
 }
