@@ -1,3 +1,6 @@
 {{-- THIS WILL BE THE LANDING PAGE --}}
-
-<div>Hello World!</div>
+<x-layout>
+    <div>
+        <a href="{{ route('login')}}" class="btn btn-primary">Sign in</a>
+    </div>
+</x-layout>
