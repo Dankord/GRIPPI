@@ -20,15 +20,15 @@ class LoginController extends Controller
 
     public function store(Request $request)
     {
-        $$credentials = $request->validate([
+        $credentials = $request->validate([
             'personnel_number' => ['required', 'string', 'max:50'],
             'password' => ['required', 'string']
         ]);
 
-        $personnelNumber = trim('personnel_number');
+        $personnelNumber = trim($credentials['personnel_number']);
 
         // Use the personel number + IP (the stuff I used during the web dev security feature) to limit repeated request login attempt
-        $key = Str::lower($personnelNumber).'|'.$request->id();
+        $key = Str::lower($personnelNumber).'|'.$request->ip();
 
         if(RateLimiter::tooManyAttempts($key, 5)) {
             throw ValidationException::withMessages([
@@ -53,7 +53,7 @@ class LoginController extends Controller
         }
 
         RateLimiter::clear($key);
-        $requestsession()->regenerate();
+        $request->session()->regenerate();
         return  redirect()->intended('/dashboard');
     }
 }

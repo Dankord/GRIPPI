@@ -1,9 +1,69 @@
 @import 'tailwindcss';
+@plugin "daisyui" {
+    themes: grippi --default;
+}
+
+@plugin "daisyui/theme" {
+    name: "grippi";
+    default: true;
+    color-scheme: dark;
+
+    --color-base-100: #0F172A;
+    --color-base-200: #082F49;
+    --color-base-300: #64748B;
+    --color-base-content: #FFFFFF;
+
+    --color-primary: #0C4A6E;
+    --color-primary-content: #FFFFFF;
+
+    --color-secondary: #64748B;
+    --color-secondary-content: #FFFFFF;
+
+    --color-accent: #F59E0B;
+    --color-accent-content: #0F172A;
+
+    --color-neutral: #082F49;
+    --color-neutral-content: #FFFFFF;
+
+    --color-info: #38BDF8;
+    --color-success: #22C55E;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+}
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Satoshi';
+    src: url('../fonts/Satoshi-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: "Satoshi", sans-serif;
+}
+
+@layer base {
+    body {
+        font-family: "Satoshi", sans-serif;
+    }
 }
