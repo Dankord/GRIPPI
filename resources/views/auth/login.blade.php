@@ -12,7 +12,7 @@
                     <div class="flex flex-col text-left w-100 h-auto my-1 px-2 ">
                         <h1 class="text-white text-3xl w-100 h-auto my-1 p-1 font-bold flex items-center justify-center mb-8">Sign In</h1>
                         <label for="personnel_number" class="text-white">
-                        ID Number <span class="text-yellow-500">*</span>
+                            ID Number <span class="text-yellow-500">*</span>
                         </label>
                         <input type="text" name="personnel_number" value="{{ old('personnel_number') }}" placeholder="Personnel ID Number" class="border rounded-md bg-transparent p-2 mb-2 text-sm w-full @error('personnel_number') border-red-500 @else border-slate-500 @enderror" required>
                         @error('personnel_number')
@@ -27,8 +27,8 @@
 
                         <div class="flex justify-between p-2">
                             <div class="flex items-center">
-                            <input type="checkbox" name="remember_me" id="remember_me" class="checkbox checkbox-sm checkbox-accent cursor-pointer">
-                            <label for="remember_me" class="text-white ml-1.5">Remember Me</label>
+                                <input type="checkbox" name="remember_me" id="remember_me" class="checkbox checkbox-sm checkbox-accent cursor-pointer">
+                                <label for="remember_me" class="text-white ml-1.5">Remember Me</label>
                             </div>
                             <p class="flex justify-end ml-auto hover:underline cursor-pointer text-accent">Forgot Password?</p>
                         </div>
