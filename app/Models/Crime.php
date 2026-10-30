@@ -16,7 +16,9 @@ class Crime extends Model
         'crime_category_id',
         'station_id',
         'reported_by_id',
-        'occured_at',
+        'severity',
+        'description',
+        'occurred_at',
         'reported_at',
         'address',
         'location',
@@ -25,7 +27,7 @@ class Crime extends Model
     protected function casts(): array
     {
         return [
-            'occured_at' => 'datetime',
+            'occurred_at' => 'datetime',
             'reported_at' => 'datetime',
         ];
     }
@@ -45,10 +47,10 @@ class Crime extends Model
         return $this->belongsTo(User::class, 'reported_by_id');
     }
 
-    public function scopeOccuredBetween(Builder $query, Carbon $start, Carbon $end)
+    public function scopeOccuredBetween(Builder $query, Carbon $start, Carbon $end): Builder
     {
         return $query->whereBetween(
-            'occured_at',
+            'occurred_at',
             [$start, $end]
         );
     }
