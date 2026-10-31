@@ -32,12 +32,12 @@ return new class extends Migration
     public function down(): void
     {
         DB::statement("
-            DROP INDEX IF EXIST crimes_location_gist
+            DROP INDEX IF EXISTS crimes_location_gist
         ");
 
         DB::statement("
             ALTER TABLE crimes
-            DROP COLUMN IF EXIST location
+            DROP COLUMN IF EXISTS location
         ");
     }
 };

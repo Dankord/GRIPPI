@@ -60,4 +60,15 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_OFFICER;
     }
+
+    public function canAccess(): bool
+    {
+        return $this->exists
+            && $this->deleted_at === null
+            && in_array($this->role, [
+                self::ROLE_ADMIN,
+                self::ROLE_ENCODER,
+                self::ROLE_OFFICER
+            ], true);
+    }
 }

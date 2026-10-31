@@ -23,13 +23,17 @@ class Station extends Model
         ];
     }
 
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
     public function crimes(): HasMany
     {
         return $this->hasMany(Crime::class);
     }
-
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class);
+    // query only active stations
+    public function scopeActive($query) {
+        return $query->where('is_active', true);
     }
 }
