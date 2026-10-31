@@ -3,10 +3,9 @@
         Sign-In
     </x-slot:title>
 
-    <div class="flex items-center justify-center min-h-screen flex-col">
         <div class="flex items-center justify-center w-100 h-auto p-1">
             <div class="card">
-                <div class="card-body w-auto h-auto bg-slate-800 shadow-xl rounded-xl">
+                <div class="card-body w-auto h-auto bg-slate-800 shadow-xl rounded-xl border border-base-content/60">
                 <form action="{{ route('login.store') }}" method="post">
                     @csrf
                     <div class="flex flex-col text-left w-100 h-auto my-1 px-2 ">
@@ -37,5 +36,4 @@
                     <button type="submit" class="bg-accent rounded-md text-black w-full p-2 cursor-pointer hover:bg-amber-300">Log In</button>
             </form>
         </div>
-    </div>
 </x-layout>
