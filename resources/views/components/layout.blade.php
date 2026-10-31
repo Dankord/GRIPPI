@@ -6,7 +6,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title> {{ isset($title) ? $title . ' - GRIPPI ' : 'GRIPPI '}}</title>
 </head>
-<body class="bg-slate-900">
+<body class="bg-base-100 flex items-center justify-center min-h-screen flex-col">
     {{ $slot }}
 </body>
 </html>
