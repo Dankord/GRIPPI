@@ -23,13 +23,28 @@ return new class extends Migration
             $table->unique(['station_id', 'cell_code']);
         });
 
+        // add the geometry
         DB::statement("
             ALTER TABLE grid_cells
             ADD COLUMN geometry geometry(Polygon, 4326) NOT NULL
         ");
-
+        // ensure positive cell area
         DB::statement("
-            CREATE INDEX grid_cells_geometry_gists
+            ALTER TABLE grid_cells
+            ADD CONSTRAINT grid_cells_area_positive
+            CHECK (area_sq_km > 0)
+        ");
+
+        // addition: check if the polygon is valid/existing
+        DB::statement("
+            ALTER TABLE grid_cells
+            ADD CONSTRAINT grid_cells_geometry_valid
+            CHECK (ST_isValid(geometry))
+        ");
+
+        // Add spatial index
+        DB::statement("
+            CREATE INDEX grid_cells_geometry_gist
             ON grid_cells
             USING GIST(geometry)
         ");
