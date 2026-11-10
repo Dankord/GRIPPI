@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Auth;
@@ -18,30 +19,29 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function store(Request $request)
-    {        
+    public function store(Request $request): RedirectResponse
+    {
         $credentials = $request->validate([
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string']
         ]);
 
-        $email = trim($credentials['email']);
+        $email = Str::lower(trim($credentials['email']));
 
         // Use the email + IP (the stuff I used during the web dev security feature) to limit repeated request login attempt
-        $key = Str::lower($email).'|'.$request->ip();
+        $key = $email . '|' . $request->ip();
 
-        if(RateLimiter::tooManyAttempts($key, 5)) {
+        if (RateLimiter::tooManyAttempts($key, 5)) {
             throw ValidationException::withMessages([
-                'email' => 'Too many login attempts, Please try again later.',
+                'email' => 'Too many login attempts, please try again later.',
             ]);
         }
-
+        // find user, including soft-deleted ones
         $user = User::withTrashed()->where('email', $email)->first();
 
-        if(
+        if (
             ! $user ||
             ! $user->canAccess() ||
-            
             ! Auth::attempt([
                 'email' => $email,
                 'password' => $credentials['password']
@@ -52,9 +52,23 @@ class LoginController extends Controller
                 'email' => 'The provided credentials are incorrect',
             ]);
         }
-
+        // clear failed attempts after successful login
         RateLimiter::clear($key);
+
         $request->session()->regenerate();
-        return  redirect()->intended('/dashboard');
+
+        return  $this->redirectByRole($user);
+    }
+
+    private function redirectByRole(User $user): RedirectResponse
+    {
+        return match ($user->role) {
+            'officer' => redirect()->route('officer.dashboard'),
+            'sub_encoder', 'main_encoder' => redirect()->route('encoder.dashboard'),
+            'admin' => redirect()->route('admin.dashboard'),
+            'super_admin' => redirect()->route('super_admin.dashboard'),
+
+            default => abort(403)
+        };
     }
 }
