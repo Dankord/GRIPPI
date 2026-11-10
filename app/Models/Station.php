@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -32,13 +33,17 @@ class Station extends Model
     {
         return $this->hasMany(Crime::class);
     }
-    // query only active stations
-    public function scopeActive($query) {
-        return $query->where('is_active', true);
-    }
-
     public function gridCells(): HasMany
     {
         return $this->hasMany(GridCell::class);
+    }
+    public function crimeTemporalAggregates(): HasMany
+    {
+        return $this->hasMany(CrimeTemporalAggregate::class);
+    }
+    // query only active stations
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
     }
 }
