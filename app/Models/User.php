@@ -13,15 +13,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
 
     public const ROLE_ADMIN = 'admin';
-    public const ROLE_ENCODER = 'encoder';
+    public const ROLE_SUB_ENCODER = 'sub_encoder';
+    public const ROLE_MAIN_ENCODER = 'main_encoder';
     public const ROLE_OFFICER = 'officer';
 
     /**
@@ -52,10 +55,16 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_ADMIN;
     }
-    public function isEncoder(): bool
+    public function isSubEncoder(): bool
     {
-        return $this->role === self::ROLE_ENCODER;
+        return $this->role === self::ROLE_SUB_ENCODER;
     }
+
+    public function isMainEncoder(): bool
+    {
+        return $this->role === self::ROLE_MAIN_ENCODER;
+    }
+
     public function isOfficer(): bool
     {
         return $this->role === self::ROLE_OFFICER;
@@ -67,7 +76,8 @@ class User extends Authenticatable
             && $this->deleted_at === null
             && in_array($this->role, [
                 self::ROLE_ADMIN,
-                self::ROLE_ENCODER,
+                self::ROLE_SUB_ENCODER,
+                self::ROLE_MAIN_ENCODER,
                 self::ROLE_OFFICER
             ], true);
     }

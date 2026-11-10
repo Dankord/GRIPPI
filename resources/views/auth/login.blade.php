@@ -10,11 +10,11 @@
                     @csrf
                     <div class="flex flex-col text-left w-100 h-auto my-1 px-2 ">
                         <h1 class="text-white text-3xl w-100 h-auto my-1 p-1 font-bold flex items-center justify-center mb-8">Sign In</h1>
-                        <label for="personnel_number" class="text-white">
-                            ID Number <span class="text-yellow-500">*</span>
+                        <label for="email" class="text-white">
+                            Email <span class="text-yellow-500">*</span>
                         </label>
-                        <input type="text" name="personnel_number" value="{{ old('personnel_number') }}" placeholder="Personnel ID Number" class="border rounded-md bg-transparent p-2 mb-2 text-sm w-full @error('personnel_number') border-red-500 @else border-slate-500 @enderror" required>
-                        @error('personnel_number')
+                        <input type="email" name="email" value="{{ old('email') }}" placeholder="Email" class="border rounded-md bg-transparent p-2 mb-2 text-sm w-full @error('email') border-red-500 @else border-slate-500 @enderror" required>
+                        @error('email')
                             <p class="text-red-400 text-sm mb-3">{{ $message }}</p>
                         @enderror
 
