@@ -14,7 +14,7 @@ class GrippiUserSeeder extends Seeder
     public function run(): void
     {
         if(! app()->environment('local')) {
-            throw new \LogicException('GRIPPI test accounts is onyl for local environment');
+            throw new \LogicException('GRIPPI test accounts is only for local environment');
         }
 
         $testPassword = "password123";
@@ -22,24 +22,37 @@ class GrippiUserSeeder extends Seeder
         $accounts = [
             [
                 'name' => 'admin',
+                'email' => 'admin@grippi.test',
                 'personnel_number' => 'TEST-ADMIN-001',
+                'email_verified_at' => now(),
                 'role' => User::ROLE_ADMIN
             ],
             [
-                'name' => 'encoder',
-                'personnel_number' => 'TEST-ENCODER-001',
-                'role' => User::ROLE_ENCODER
+                'name' => 'sub-encoder',
+                'email' => 'sub-encoder@grippi.test',
+                'personnel_number' => 'TEST-SUB-ENCODER-001',
+                'email_verified_at' => now(),
+                'role' => User::ROLE_SUB_ENCODER
             ],
             [
-                'name' => 'admin',
+                'name' => 'main-encoder',
+                'email' => 'main-encoder@grippi.test',
+                'personnel_number' => 'TEST-MAIN-ENCODER-002',
+                'email_verified_at' => now(),
+                'role' => User::ROLE_MAIN_ENCODER
+            ],
+            [
+                'name' => 'officer',
+                'email' => 'officer@grippi.test',
                 'personnel_number' => 'TEST-OFFICER-001',
+                'email_verified_at' => now(),
                 'role' => User::ROLE_OFFICER
             ]
         ];
 
         foreach ($accounts as $data) {
             $user = User::withTrashed()
-                ->where('personnel_number', $data['personnel_number'])
+                ->where('email', $data['email'])
                 ->first();
 
                 if(!$user) {
@@ -49,6 +62,7 @@ class GrippiUserSeeder extends Seeder
                 $user->forceFill([
                     ...$data,
                     'password' => $testPassword,
+                    'email_verified_at' => now(),
                     'station_id' => null,
                     'deleted_at' => null
                 ]);

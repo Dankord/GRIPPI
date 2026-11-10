@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Auth;
@@ -18,42 +19,56 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'personnel_number' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string']
         ]);
 
-        $personnelNumber = trim($credentials['personnel_number']);
+        $email = Str::lower(trim($credentials['email']));
 
-        // Use the personel number + IP (the stuff I used during the web dev security feature) to limit repeated request login attempt
-        $key = Str::lower($personnelNumber).'|'.$request->ip();
+        // Use the email + IP (the stuff I used during the web dev security feature) to limit repeated request login attempt
+        $key = $email . '|' . $request->ip();
 
-        if(RateLimiter::tooManyAttempts($key, 5)) {
+        if (RateLimiter::tooManyAttempts($key, 5)) {
             throw ValidationException::withMessages([
-                'personnel_number' => 'Too many login attempts, Please try again later.',
+                'email' => 'Too many login attempts, please try again later.',
             ]);
         }
+        // find user, including soft-deleted ones
+        $user = User::withTrashed()->where('email', $email)->first();
 
-        $user = User::withTrashed()->where('personnel_number', $personnelNumber)->first();
-
-        if(
+        if (
             ! $user ||
             ! $user->canAccess() ||
-            ! Auth::atempt([
-                'personnel_number' => $personnelNumber,
+            ! Auth::attempt([
+                'email' => $email,
                 'password' => $credentials['password']
             ])
         ) {
             RateLimiter::hit($key, 60);
             throw ValidationException::withMessages([
-                'personnel_number' => 'The provided credentials are incorrect',
+                'email' => 'The provided credentials are incorrect',
             ]);
         }
-
+        // clear failed attempts after successful login
         RateLimiter::clear($key);
+
         $request->session()->regenerate();
-        return  redirect()->intended('/dashboard');
+
+        return  $this->redirectByRole($user);
+    }
+
+    private function redirectByRole(User $user): RedirectResponse
+    {
+        return match ($user->role) {
+            'officer' => redirect()->route('officer.dashboard'),
+            'sub_encoder', 'main_encoder' => redirect()->route('encoder.dashboard'),
+            'admin' => redirect()->route('admin.dashboard'),
+            'super_admin' => redirect()->route('super_admin.dashboard'),
+
+            default => abort(403)
+        };
     }
 }
