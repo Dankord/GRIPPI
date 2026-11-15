@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import { escapeHtml } from '../../utils/escape-html';
 
 export function createGridLayer(geoData) {
     const gridLayer = L.geoJSON(geoData, {
@@ -7,8 +8,8 @@ export function createGridLayer(geoData) {
 
             let fillColor = '#22C55E';
 
-            if (risk === 'super high') {
-                fillColor = '##C85A53';
+            if (risk === 'very high') {
+                fillColor = '#C85A53';
             } else if (risk === 'high') {
                 fillColor = '#EB967A'
             } else if (risk === 'moderate') {
@@ -30,11 +31,11 @@ export function createGridLayer(geoData) {
             const properties = feature.properties;
 
             layer.bindPopup(`
-                <strong>${properties.cell_code}</strong>
+                <strong>${escapeHtml(properties.cell_code)}</strong>
                 <br>
                 <strong>Incidents</strong>: ${properties.incident_count ?? 0}
                 <br>
-                <strong>Risk</strong>: ${properties.risk_level ?? 'Not classified'}
+                <strong>Risk</strong>: ${escapeHtml(properties.risk_level ?? 'Not classified')}
             `);
         },
     });

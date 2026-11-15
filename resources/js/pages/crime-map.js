@@ -1,5 +1,6 @@
 import { createMap } from '../maps/map'
 import { createGridLayer } from '../maps/layers/grid-layers'
+import { createCrimeMarkers } from '../maps/layers/crime-markers'
 
 document.addEventListener("DOMContentLoaded", () => {
     const mapElement = document.getElementById("crime-map");
@@ -8,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const map = createMap(mapElement);
 
-    L.marker([14.5547, 121.0244]).addTo(map).bindPopup("Makati");
+    L.marker([14.5547, 121.0244]).addTo(map).bindPopup("Makati Test marker");
+    //! Test data for grid cells (temporary)
     const gridCells = {
         type: "FeatureCollection",
         features: [
@@ -54,7 +56,55 @@ document.addEventListener("DOMContentLoaded", () => {
             },
         ],
     };
+    //! Test data for crime markers (temporary)
+    const crimes = {
+        type: 'FeatureCollection',
+        features: [
+            {
+                type: 'Feature',
+                properties: {
+                    category: 'Theft',
+                    severity: 'high',
+                    occurred_at: '2026-11-15 10:30:00',
+                    address: 'Sample Location 1, Makati',
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [121.021, 14.554],
+                },
+            },
+            {
+                type: 'Feature',
+                properties: {
+                    category: 'Robbery',
+                    severity: 'moderate',
+                    occurred_at: '2026-11-15 14:00:00',
+                    address: 'Sample Location 2, Makati',
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [121.024, 14.555],
+                },
+            },
+            {
+                type: 'Feature',
+                properties: {
+                    category: 'Burglary',
+                    severity: 'low',
+                    occurred_at: '2026-11-15 18:00:00',
+                    address: 'Sample Location 3, Makati',
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [121.025, 14.554],
+                },
+            },
+        ],
+    };
 
     const gridLayer = createGridLayer(gridCells);
+    const crimeLayer = createCrimeMarkers(crimes);
+
     gridLayer.addTo(map);
+    crimeLayer.addTo(map);
 });
