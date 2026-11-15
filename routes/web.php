@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 
@@ -20,19 +21,19 @@ Route::middleware('auth')->group(function() {
     Route::post('/logout', LogoutController::class)->name('logout');
 
     Route::middleware('role:officer')->prefix('officer')->name('officer.')->group(function() {
-        // Route::get('dashboard', [DashboardController::class, 'officer'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'officer'])->name('dashboard');
     });
 
     Route::middleware('role:sub_encoder,main_encoder')->prefix('encoder')->name('encoder.')->group(function() {
-        // Route::get('dashboard', [DashboardController::class, 'encoder'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'encoder'])->name('dashboard');
     });
 
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function() {
-        // Route::get('dashboard', [DashboardController::class, 'admin'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'admin'])->name('dashboard');
     });
 
-    Route::middleware('role:super_admin')->prefix('super_admin')->name('super_admin.')->group(function() {
-        // Route::get('dashboard', [DashboardController::class, 'super_admin'])->name('dashboard');
+    Route::middleware('role:super_admin')->prefix('super-admin')->name('super-admin.')->group(function() {
+        Route::get('dashboard', [DashboardController::class, 'superAdmin'])->name('dashboard');
     });
 });
 
