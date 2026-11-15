@@ -10,7 +10,7 @@
         <div
             id="crime-map"
             class="w-full rounded-xl border border-gray-300"
-            style="height: 600px;"
+            style="height: 600px"
         ></div>
     </div> --}}
 </x-layout>
