@@ -1,6 +1,6 @@
 # GRIPPI
 
-**Geo Rendering Innovative Police Patrol Interface**
+**Geospatial Risk Information Proactive Patrol Intelligence**
 
 A web-based geospatial crime pattern analytics support system designed to support crime data analysis, spatial visualization, and patrol planning.
 
