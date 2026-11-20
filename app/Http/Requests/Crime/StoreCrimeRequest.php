@@ -26,13 +26,17 @@ class StoreCrimeRequest extends FormRequest
         return [
             'crime_category_id' => [
                 'required',
-                'exists:crime_category,id',
+                'exists:crime_categories,id', //gng its crime_categories not crime_category imma change it okay?
             ],
-            'occured_at' => [
+            'occurred_at' => [
                 'required',
                 'date'
             ],
             'description' => [
+                'nullable',
+                'string'
+            ],
+             'address' => [
                 'nullable',
                 'string'
             ],
