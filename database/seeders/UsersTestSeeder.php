@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
-class GrippiUserSeeder extends Seeder
+class UsersTestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -25,6 +25,7 @@ class GrippiUserSeeder extends Seeder
                 'email' => 'admin@grippi.test',
                 'personnel_number' => 'TEST-ADMIN-001',
                 'email_verified_at' => now(),
+                'station_id' => 1,
                 'role' => User::ROLE_ADMIN
             ],
             [
@@ -32,6 +33,7 @@ class GrippiUserSeeder extends Seeder
                 'email' => 'sub-encoder@grippi.test',
                 'personnel_number' => 'TEST-SUB-ENCODER-001',
                 'email_verified_at' => now(),
+                'station_id' => 1,
                 'role' => User::ROLE_SUB_ENCODER
             ],
             [
@@ -39,6 +41,7 @@ class GrippiUserSeeder extends Seeder
                 'email' => 'main-encoder@grippi.test',
                 'personnel_number' => 'TEST-MAIN-ENCODER-002',
                 'email_verified_at' => now(),
+                'station_id' => 1,
                 'role' => User::ROLE_MAIN_ENCODER
             ],
             [
@@ -46,9 +49,10 @@ class GrippiUserSeeder extends Seeder
                 'email' => 'officer@grippi.test',
                 'personnel_number' => 'TEST-OFFICER-001',
                 'email_verified_at' => now(),
+                'station_id' => 1,
                 'role' => User::ROLE_OFFICER
             ]
-        ];
+        ];  
 
         foreach ($accounts as $data) {
             $user = User::withTrashed()
@@ -63,7 +67,6 @@ class GrippiUserSeeder extends Seeder
                     ...$data,
                     'password' => $testPassword,
                     'email_verified_at' => now(),
-                    'station_id' => null,
                     'deleted_at' => null
                 ]);
 
