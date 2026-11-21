@@ -19,4 +19,12 @@ class CrimeCategory extends Model
     {
         return $this->hasMany(Crime::class);
     }
+    public function crimeCellAggregates(): HasMany
+    {
+        return $this->hasMany(CrimeCellAggregate::class);
+    }
+    public function crimeTemporalAggregates(): HasMany
+    {
+        return $this->hasMany(CrimeTemporalAggregate::class);
+    }
 }
