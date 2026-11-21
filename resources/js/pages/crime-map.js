@@ -1,6 +1,7 @@
 import { createMap } from '../maps/map'
 import { createGridLayer } from '../maps/layers/grid-layers'
 import { createCrimeMarkers } from '../maps/layers/crime-markers'
+import L from 'leaflet'
 
 document.addEventListener("DOMContentLoaded", () => {
     const mapElement = document.getElementById("crime-map");

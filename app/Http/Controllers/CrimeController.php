@@ -5,6 +5,7 @@ use App\Models\Crime;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Crime\StoreCrimeRequest;
+use Illuminate\Support\Facades\DB;
 
 class CrimeController extends Controller
 {
@@ -13,7 +14,7 @@ class CrimeController extends Controller
      */
     public function index()
     {
-        $crimes = Crime::latest()->paginate(10); 
+        $crimes = Crime::latest()->paginate(10);
 
         return response()->json($crimes); //im not really sure how i'll return data to the frontend just correct me if im wrong, but i used json response here
     }
@@ -33,12 +34,23 @@ class CrimeController extends Controller
     {
         $validated = $request->validated();
 
-        $validated['station_id'] = auth()->user()->station_id;
-        $validated['reported_by_id'] = auth()->id();
+        $validated['station_id'] = $request->user()->station_id;
+        $validated['reported_by_id'] = $request->user()->id;
         $validated['reported_at'] = now();
-        
 
-        //yo future me add uhh address, location, location is uhh geometry apparently xD idk where to get that doe ask kerv
+        $latitude = $validated['latitude'];
+        $longitude = $validated['longitude'];
+
+        $validated['location'] = DB::raw(
+            "ST_SetSRID(
+                ST_MakePoint($longitude, $latitude),
+                4326
+            )"
+        );
+        // remove the temp coordinate data
+        unset($validated['latitude'], $validated['longitude']);
+
+        //yo future me add uhh address, location, location is uhh geometry apparently xD idk where to get that doe ask kerv - Yeah bro Im doing it
         Crime::create($validated);
 
         return redirect()
