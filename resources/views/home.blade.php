@@ -15,7 +15,7 @@
     </div> --}}
 
     {{-- form location test --}}
-    <div class="w-6xl">
+    {{-- <div class="w-6xl">
         <x-crimeLocation />
-    </div>
+    </div> --}}
 </x-layout>
