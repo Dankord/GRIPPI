@@ -43,6 +43,16 @@ class StoreCrimeRequest extends FormRequest
             'severity' => [
                 'required',
                 'in:low,moderate,high'
+            ],
+            'latitude' => [
+                'required',
+                'numeric',
+                'between:-90,90'
+            ],
+            'longitude' => [
+                'required',
+                'numeric',
+                'between:-180,180'
             ]
         ];
     }

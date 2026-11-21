@@ -13,4 +13,9 @@
             style="height: 600px"
         ></div>
     </div> --}}
+
+    {{-- form location test --}}
+    <div class="w-6xl">
+        <x-crimeLocation />
+    </div>
 </x-layout>
