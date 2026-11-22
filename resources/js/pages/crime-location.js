@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addressInput = document.getElementById('selected-address');
     const latitudeInput = document.getElementById('lat');
     const longitudeInput = document.getElementById('long');
+    const selectedAddressDisplay = document.getElementById('selected-address-display');
 
-    if(!searchInput || !resultContainer || !addressInput || !latitudeInput || !longitudeInput) return;
+    if(!searchInput || !resultContainer || !addressInput || !latitudeInput || !longitudeInput || !selectedAddressDisplay) return;
 
     const mapElement = document.getElementById('crime-location-map');
     const map = mapElement ? createMap(mapElement) : null;
@@ -148,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         addressInput.value = location.display_name;
         latitudeInput.value = latitude;
         longitudeInput.value = longitude;
+        selectedAddressDisplay.textContent = location.display_name;
 
         resultContainer.classList.add('hidden');
 

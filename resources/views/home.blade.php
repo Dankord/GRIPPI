@@ -16,6 +16,11 @@
 
     {{-- form location test --}}
     {{-- <div class="w-6xl">
-        <x-crimeLocation />
+        <x-crime-form.crimeLocation />
     </div> --}}
+
+    {{-- form testing --}}
+    {{-- <button class="btn btn-primary" onclick="document.getElementById('crime_form').showModal()">Add Crime Report</button>
+
+    <x-crime-form.crime-form /> --}}
 </x-layout>
