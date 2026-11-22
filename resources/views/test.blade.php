@@ -13,6 +13,5 @@
         <x-sidebar />
         <x-navbar />
     </div>
-    
-</body> 
+</body>
 </html>

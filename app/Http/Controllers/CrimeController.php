@@ -41,6 +41,7 @@ class CrimeController extends Controller
         $latitude = $validated['latitude'];
         $longitude = $validated['longitude'];
 
+        // combine them into a point for the database to store
         $validated['location'] = DB::raw(
             "ST_SetSRID(
                 ST_MakePoint($longitude, $latitude),
