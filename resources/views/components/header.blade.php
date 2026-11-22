@@ -4,9 +4,9 @@
 
 <div class="navbar w-full h-20 border-b border-divider px-8 top-0 flex justify-between select-none">
     <div class="navbar-start w-auto flex items-center gap-4">
-        <button 
-                type="button" 
-                id="sidebar-toggle" 
+        <button
+                type="button"
+                id="sidebar-toggle"
                 class="btn btn-ghost btn-square text-base-content"
                 aria-label="Toggle sidebar"
             >

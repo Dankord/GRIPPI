@@ -12,30 +12,33 @@
             ['id' => 'sub6',     'name' => 'Substation 6'],
         ];
     @endphp
-    
+
     <div class="flex flex-col w-full gap-2">
         <a href="" class="px-4 py-2.5 text-base-content gap-4 flex items-center hover:text-base-content hover:bg-base-content/5">
             <x-lucide-house class="w-4 h-4" />
             Home
         </a>
+        {{-- Check if its an officer, if it is, remove the option to input incident --}}
+        @unless(auth()->user()->role === \App\Models\User::ROLE_OFFICER)
         <a href="" class="px-4 py-2.5 text-base-content gap-4 flex items-center hover:text-base-content hover:bg-base-content/5">
             <x-lucide-notebook-pen class="w-4 h-4" />
             Incidents
         </a>
+        @endunless
     </div>
-    
+
     <div class="flex flex-col w-full gap-1">
         @foreach ($tabs as $tab)
             @php
                 $isActive = ($currentTab === $tab['id']);
             @endphp
 
-            <a 
+            <a
                 href="{{ request()->fullUrlWithQuery(['tab' => $tab['id']]) }}"
                 class="px-4 py-2.5 flex gap-4 items-center flex-1 text-center transition-all {{
-                    $isActive 
-                        ? 'bg-primary text-primary-content' 
-                        : 'text-base-content hover:text-base-content hover:bg-base-content/5' 
+                    $isActive
+                        ? 'bg-primary text-primary-content'
+                        : 'text-base-content hover:text-base-content hover:bg-base-content/5'
                 }}"
             >
                 @unless ($loop -> first)
@@ -43,7 +46,7 @@
                 @endunless
                 {{ $tab['name'] }}
             </a>
-        @endforeach    
+        @endforeach
     </div>
 
     <div class="w-full flex-1">

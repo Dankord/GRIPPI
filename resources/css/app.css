@@ -74,6 +74,7 @@ input,
 select,
 textarea {
     font-family: "Satoshi", sans-serif;
+}
 @layer base {
     body {
         font-family: "Satoshi", sans-serif;
