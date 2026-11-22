@@ -40,5 +40,7 @@ Route::middleware('auth')->group(function() {
         Route::get('dashboard', [DashboardController::class, 'superAdmin'])->name('dashboard');
     });
 
+Route::get('/test', function() {
+    return view('test');
     Route::get('/crimes', [CrimeController::class, 'index'])->name('crimes.index');
 });
