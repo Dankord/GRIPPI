@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public const ROLE_SUB_ENCODER = 'sub_encoder';
     public const ROLE_MAIN_ENCODER = 'main_encoder';
     public const ROLE_OFFICER = 'officer';
+    public const ROLE_SUPER_ADMIN = 'super_admin';
 
     /**
      * Get the attributes that should be cast.
@@ -78,7 +79,8 @@ class User extends Authenticatable implements MustVerifyEmail
                 self::ROLE_ADMIN,
                 self::ROLE_SUB_ENCODER,
                 self::ROLE_MAIN_ENCODER,
-                self::ROLE_OFFICER
+                self::ROLE_OFFICER,
+                self::ROLE_SUPER_ADMIN,
             ], true);
     }
 }

@@ -66,7 +66,7 @@ class LoginController extends Controller
             'officer' => redirect()->route('officer.dashboard'),
             'sub_encoder', 'main_encoder' => redirect()->route('encoder.dashboard'),
             'admin' => redirect()->route('admin.dashboard'),
-            'super_admin' => redirect()->route('super_admin.dashboard'),
+            'super_admin' => redirect()->route('super-admin.dashboard'),
 
             default => abort(403)
         };
