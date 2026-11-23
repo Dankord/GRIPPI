@@ -1,6 +1,6 @@
 <x-authorized-layout>
     <x-slot:title>
-        Officer
+        Crime Map
     </x-slot:title>
     <h1>Testing</h1>
 </x-authorized-layout>

@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function() {
         Route::get('/crime-map', [CrimeMapController::class, 'index'])->name('crime-map');
     });
 
-    Route::middleware('role:sub_encoder,main_encoder')->prefix('encoder')->name('encoder.')->group(function() {
+    Route::middleware('role:encoder')->prefix('encoder')->name('encoder.')->group(function() {
         Route::get('dashboard', [DashboardController::class, 'encoder'])->name('dashboard');
 
         Route::post('/submit-crime', [CrimeController::class, 'store'])->name('crime.store'); //temporary ya'll can change this later for submittin report

@@ -14,8 +14,7 @@ class CrimePolicy
     {
         return in_array($user->role, [
             'officer',
-            'sub_encoder',
-            'main_encoder',
+            'encoder',
             'admin',
             'super_admin',
         ], true);
@@ -32,8 +31,7 @@ class CrimePolicy
 
         return in_array($user->role, [
             'officer',
-            'sub_encoder',
-            'main_encoder',
+            'encoder',
             'admin',
         ], true)
         && $user->station_id !== null
@@ -46,8 +44,7 @@ class CrimePolicy
     public function create(User $user): bool
     {
         return in_array($user->role, [
-            'sub_encoder',
-            'main_encoder',
+            'encoder',
             'admin',
             'super_admin',
         ], true);
@@ -61,13 +58,13 @@ class CrimePolicy
         if ($user->role === 'super_admin') {
             return true;
         }
-
-        return in_array($user->role, [
-            'main_encoder',
-            'admin',
-        ], true)
-        && $user->station_id !== null
-        && (int) $user->station_id === (int) $crime->station_id;
+        if($user->role === 'encoder') {
+            return (int) $user->id === (int) $crime->reported_by_id;
+        }
+        if($user->role === 'admin') {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -80,7 +77,6 @@ class CrimePolicy
         }
 
         return in_array($user->role, [
-            'main_encoder',
             'admin',
         ], true)
         && $user->station_id !== null
