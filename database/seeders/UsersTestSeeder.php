@@ -29,20 +29,12 @@ class UsersTestSeeder extends Seeder
                 'role' => User::ROLE_ADMIN
             ],
             [
-                'name' => 'sub-encoder',
-                'email' => 'sub-encoder@grippi.test',
-                'personnel_number' => 'TEST-SUB-ENCODER-001',
+                'name' => 'encoder',
+                'email' => 'encoder@grippi.test',
+                'personnel_number' => 'TEST-ENCODER-001',
                 'email_verified_at' => now(),
                 'station_id' => 1,
-                'role' => User::ROLE_SUB_ENCODER
-            ],
-            [
-                'name' => 'main-encoder',
-                'email' => 'main-encoder@grippi.test',
-                'personnel_number' => 'TEST-MAIN-ENCODER-002',
-                'email_verified_at' => now(),
-                'station_id' => 1,
-                'role' => User::ROLE_MAIN_ENCODER
+                'role' => User::ROLE_ENCODER
             ],
             [
                 'name' => 'officer',

@@ -11,19 +11,24 @@
     --color-base-100: #0F172A;
     --color-base-200: #082F49;
     --color-base-300: #64748B;
-    --color-base-content: #FFFFFF;
+    --color-base-content: #F8FAFC;
 
-    --color-primary: #0C4A6E;
-    --color-primary-content: #FFFFFF;
+    --color-main: #0F127A; /* background */ 
+    --color-info: #082F49; /* card, textarea, radio */
+    --color-divider: #F8FAFC;
+    --color-hover: #101C38; 
+
+    --color-primary: #0C4A6E; /* also applicable for active state*/
+    --color-primary-content: #F8FAFC;
 
     --color-secondary: #64748B;
-    --color-secondary-content: #FFFFFF;
+    --color-secondary-content: #F8FAFC;
 
     --color-accent: #F59E0B;
     --color-accent-content: #0F172A;
 
     --color-neutral: #082F49;
-    --color-neutral-content: #FFFFFF;
+    --color-neutral-content: #F8FAFC;
 
     --color-info: #38BDF8;
     --color-success: #22C55E;
@@ -59,11 +64,54 @@
 }
 
 @theme {
-    --font-sans: "Satoshi", sans-serif;
+    --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
 }
 
+html,
+body,
+button,
+input,
+select,
+textarea {
+    font-family: "Satoshi", sans-serif;
+}
 @layer base {
     body {
         font-family: "Satoshi", sans-serif;
+    }
+}
+
+@layer components {
+    .form-label {
+        color: #fff;
+        font-weight: 500;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        margin-bottom: 0.25rem;
+    }
+    .form-input {
+        color: #fff;
+        border-radius: 0.375rem;
+        background-color: #082f49;
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        width: 100%;
+        border-color: #64748b;
+        border-style: solid;
+        border-width: 2px;
+        height: auto;
+    }
+
+    .progress-segment {
+    height: 6px;
+    flex: 1;
+    border-radius: 999px;
+    background-color: #334155;
+    transition: background-color 0.3s ease;
+    }
+
+    .progress-segment.active {
+        background-color: #F59E0B;
     }
 }
