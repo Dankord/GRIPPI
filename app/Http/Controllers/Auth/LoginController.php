@@ -64,7 +64,7 @@ class LoginController extends Controller
     {
         return match ($user->role) {
             'officer' => redirect()->route('officer.dashboard'),
-            'sub_encoder', 'main_encoder' => redirect()->route('encoder.dashboard'),
+            'encoder' => redirect()->route('encoder.dashboard'),
             'admin' => redirect()->route('admin.dashboard'),
             'super_admin' => redirect()->route('super-admin.dashboard'),
 

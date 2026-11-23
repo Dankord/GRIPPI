@@ -23,8 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, SoftDeletes;
 
     public const ROLE_ADMIN = 'admin';
-    public const ROLE_SUB_ENCODER = 'sub_encoder';
-    public const ROLE_MAIN_ENCODER = 'main_encoder';
+    public const ROLE_ENCODER = 'encoder';
     public const ROLE_OFFICER = 'officer';
     public const ROLE_SUPER_ADMIN = 'super_admin';
 
@@ -56,14 +55,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->role === self::ROLE_ADMIN;
     }
-    public function isSubEncoder(): bool
+    public function isEncoder(): bool
     {
-        return $this->role === self::ROLE_SUB_ENCODER;
-    }
-
-    public function isMainEncoder(): bool
-    {
-        return $this->role === self::ROLE_MAIN_ENCODER;
+        return $this->role === self::ROLE_ENCODER;
     }
 
     public function isOfficer(): bool
@@ -77,8 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
             && $this->deleted_at === null
             && in_array($this->role, [
                 self::ROLE_ADMIN,
-                self::ROLE_SUB_ENCODER,
-                self::ROLE_MAIN_ENCODER,
+                self::ROLE_ENCODER,
                 self::ROLE_OFFICER,
                 self::ROLE_SUPER_ADMIN,
             ], true);
