@@ -13,10 +13,10 @@
     --color-base-300: #64748B;
     --color-base-content: #F8FAFC;
 
-    --color-main: #0F127A; /* background */ 
-    --color-info: #082F49; /* card, textarea, radio */
+    --color-main: #0F127A; /* background */
+    --color-card: #082F49; /* card, textarea, radio */
     --color-divider: #F8FAFC;
-    --color-hover: #101C38; 
+    --color-hover: #101C38;
 
     --color-primary: #0C4A6E; /* also applicable for active state*/
     --color-primary-content: #F8FAFC;
