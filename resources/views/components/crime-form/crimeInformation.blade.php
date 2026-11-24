@@ -65,7 +65,7 @@
     <label class="form-label">Incident Report</label>
     <div class="flex flex-row gap-5 mb-5">
 
-        @foreach (['Low', 'Moderate', 'High'] as $severity)
+        @foreach (['Attempted', 'Frustrated', 'Consummated'] as $severity)
         <label class="flex items-center bg-sky-950 rounded-md p-2 w-full cursor-pointer border-2 border-slate-500 has-checked:border-yellow-500">
             <span class="text-white flex justify-center items-center font-medium text-sm w-full">
                 {{ $severity }}
