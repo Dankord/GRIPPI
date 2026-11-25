@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<x-authorized-layout>
+    <x-slot:title>
+        Encoder
+    </x-slot:title>
+    <h1>Dashhhhboard</h1>
+</x-authorized-layout>
+
+
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -123,4 +131,4 @@
         }
     </style> <!-- hello front end dev, this code is a test code so its really messy its for testing backend orayt tootalooos -->
 </body>
-</html>
+</html> --}}

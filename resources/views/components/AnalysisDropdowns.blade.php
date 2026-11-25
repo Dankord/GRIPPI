@@ -1,4 +1,4 @@
-<div class="flex items-start justify-start mb-5 gap-2"> 
+<div class="flex items-start justify-start mb-5 gap-2">
     <select name="station" class="flex items-center text-center text-slate-950 rounded-full bg-white p-3 text-sm w-full border-slate-500 border-2 resize-none h-auto mb-5">
         <option value="" disabled selected>Select Station</option>
         <option value="Station1">Station 1</option>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Crime;
+use App\Models\CrimeCategory;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\Crime\StoreCrimeRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CrimeController extends Controller
 {
@@ -14,9 +16,20 @@ class CrimeController extends Controller
      */
     public function index()
     {
-        $crimes = Crime::latest()->paginate(10);
+        // $crimes = Crime::latest()->paginate(10);
 
-        return response()->json($crimes); //im not really sure how i'll return data to the frontend just correct me if im wrong, but i used json response here
+        // return response()->json($crimes); //im not really sure how i'll return data to the frontend just correct me if im wrong, but i used json response here
+        $user = Auth::user();
+        // uses only one index, return different crime maps base on the role
+        $view = match ($user->role) {
+            'officer' => 'officer.crime-report',
+            'encoder' => 'encoder.crime-report',
+            'admin' => 'admin.crime-report',
+            default => abort(403),
+        };
+        $crimeCategories = CrimeCategory::orderBy('name')->get();
+
+        return view($view, compact('crimeCategories'));
     }
 
     /**

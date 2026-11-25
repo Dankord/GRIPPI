@@ -9,11 +9,10 @@
                 // uncomment this if the page and route is existing now
                 // ['name' => 'Analysis', 'route' => 'officer.analysis'],
             ],
-            in_array($user->role, ['sub_encoder', 'main_encoder']) => [
+            'encoder' => [
                 ['name' => 'Dashboard', 'route' => 'encoder.dashboard'],
-                // uncomment this if the page and roue is existing
-                // ['name' => 'Reports', 'route' => 'encoder.reports'],
-                // ['name' => 'Crime Maps', 'route' => 'encoder.crime-map'],
+                ['name' => 'Crime Maps', 'route' => 'encoder.crime-map'],
+                ['name' => 'Reports', 'route' => 'encoder.crime-report'],
             ],
             // continue this for the other roles (admin and superadmin)
         }

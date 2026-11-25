@@ -22,21 +22,26 @@ Route::middleware('guest')->group(function() {
 Route::middleware('auth')->group(function() {
     Route::post('/logout', LogoutController::class)->name('logout');
 
+    // Officer
     Route::middleware('role:officer')->prefix('officer')->name('officer.')->group(function() {
         Route::get('dashboard', [DashboardController::class, 'officer'])->name('dashboard');
         Route::get('/crime-map', [CrimeMapController::class, 'index'])->name('crime-map');
     });
 
+    // Encoder
     Route::middleware('role:encoder')->prefix('encoder')->name('encoder.')->group(function() {
         Route::get('dashboard', [DashboardController::class, 'encoder'])->name('dashboard');
-
+        Route::get('/crime-map', [CrimeMapController::class, 'index'])->name('crime-map');
+        Route::get('/crime-report', [CrimeController::class, 'index'])->name('crime-report');
         Route::post('/submit-crime', [CrimeController::class, 'store'])->name('crime.store'); //temporary ya'll can change this later for submittin report
     });
 
+    // Admin
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function() {
         Route::get('dashboard', [DashboardController::class, 'admin'])->name('dashboard');
     });
 
+    // Super Admin
     Route::middleware('role:super_admin')->prefix('super-admin')->name('super-admin.')->group(function() {
         Route::get('dashboard', [DashboardController::class, 'superAdmin'])->name('dashboard');
     });
