@@ -22,5 +22,5 @@
         </div>
     </div>
     <x-crime-form.crime-form :stations="$stations" :crime-categories="$crimeCategories"/>
-    {{-- <x-report-page.report-details-drawer /> --}}
+    <x-report-page.report-details-drawer />
 </x-authorized-layout>
