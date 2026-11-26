@@ -1,6 +1,6 @@
 
 @props(['crimes'])
-<div class="overflow-x-auto w-full rounded-md">
+<div class="overflow-x-auto w-full rounded-md shadow">
     <table class="table w-full" data-report-table>
         <thead class="bg-base-200">
             <tr>
@@ -107,7 +107,7 @@
         </tbody>
     </table>
     {{-- pagination --}}
-    <div class='origin-right'>
+    <div class='origin-right mt-2'>
         {{ $crimes->onEachSide(1)->links() }}
     </div>
 </div>
