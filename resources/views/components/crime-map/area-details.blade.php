@@ -28,7 +28,7 @@
                 Most recorded crime types in this area
             </p>
 
-            {{-- Temporary data para alam ko paano to gagawin NI RAF HAHAHAHA --}}
+            {{-- Temporary data para alam paano to gagawin NI RAF HAHAHAHA --}}
             @php
                 $crimeCategories = [
                     ['name' => 'Theft', 'count' => 18],

@@ -1,10 +1,10 @@
 <dialog id="crime_form" class="modal">
-    <div class="modal-box max-w-xl p-0">
+    <div class="modal-box max-w-xl p-0 rounded-xl border border-white/60">
         {{-- Header --}}
         <div class="flex items-center justify-between p-5">
             <h2 class="text-lg font-bold">New Incident Report</h2>
             <form method="dialog">
-                <button class="btn btn-ghost btn-sm btn-circle"><x-lucide-x class="size-5"/></button>
+                <button class="btn btn-ghost btn-sm btn-circle border-none"><x-lucide-x class="size-5"/></button>
             </form>
         </div>
 

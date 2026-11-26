@@ -62,7 +62,7 @@
     </div>
 
     {{-- incident severity --}}
-    <label class="form-label">Incident Report</label>
+    <label class="form-label">Incident Level</label>
     <div class="flex flex-row gap-5 mb-5">
 
         @foreach (['Attempted', 'Frustrated', 'Consummated'] as $severity)

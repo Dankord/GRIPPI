@@ -13,7 +13,7 @@ class CrimeMapController extends Controller
         // uses only one index, return different crime maps base on the role
         $view = match ($user->role) {
             'officer' => 'officer.crime-map',
-            'sub_encoder', 'main_encoder' => 'encoder.crime-map',
+            'encoder' => 'encoder.crime-map',
             'admin' => 'admin.crime-map',
             default => abort(403),
         };
