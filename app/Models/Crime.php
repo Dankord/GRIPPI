@@ -22,6 +22,8 @@ class Crime extends Model
         'reported_at',
         'address',
         'location',
+        'report_id',
+        'status',
     ];
 
     protected function casts(): array

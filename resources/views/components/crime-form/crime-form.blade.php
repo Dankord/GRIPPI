@@ -1,3 +1,5 @@
+@props(['stations', 'crimeCategories'])
+
 <dialog id="crime_form" class="modal">
     <div class="modal-box max-w-xl p-0 rounded-xl border border-white/60">
         {{-- Header --}}
@@ -21,11 +23,11 @@
             <div class="px-5">
             {{-- Step 1 --}}
                 <section data-step="0">
-                    <x-crime-form.crimeInformation />
+                    <x-crime-form.crimeInformation :stations="$stations"/>
                 </section>
             {{-- Step 2 --}}
                 <section data-step="1">
-                    <x-crime-form.crimeClassification />
+                    <x-crime-form.crimeClassification :crime-categories="$crimeCategories"/>
                 </section>
                 {{-- Step 3 --}}
                 <section data-step="2">

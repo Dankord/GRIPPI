@@ -22,15 +22,19 @@ class CrimeController extends Controller
         // return response()->json($crimes); //im not really sure how i'll return data to the frontend just correct me if im wrong, but i used json response here
         $user = Auth::user();
         // uses only one index, return different crime maps base on the role
+
         $view = match ($user->role) {
             'officer' => 'officer.crime-report',
             'encoder' => 'encoder.crime-report',
             'admin' => 'admin.crime-report',
             default => abort(403),
         };
-        $crimeCategories = CrimeCategory::orderBy('name')->get();
 
-        return view($view, compact('crimeCategories'));
+        $crimeCategories = CrimeCategory::orderBy('name')->get();
+        $stations = Station::orderBy('name')->get();
+        $crimes = Crime::with(['crimeCategory', 'reportedBy'])->latest('created_at')->paginate(10);
+
+        return view($view, compact('crimeCategories', 'stations', 'crimes'));
     }
 
     /**
@@ -46,14 +50,14 @@ class CrimeController extends Controller
      */
     public function store(StoreCrimeRequest $request)
     {
+        $user = Auth::user();
         $validated = $request->validated();
-
-        $validated['station_id'] = $request->user()->station_id;
         $validated['reported_by_id'] = $request->user()->id;
         $validated['reported_at'] = now();
 
         $latitude = $validated['latitude'];
         $longitude = $validated['longitude'];
+        $validated['status'] = 'ongoing';
 
         // combine them into a point for the database to store
         $validated['location'] = DB::raw(
@@ -62,15 +66,29 @@ class CrimeController extends Controller
                 4326
             )"
         );
+
         // remove the temp coordinate data
         unset($validated['latitude'], $validated['longitude']);
 
+        $view = match ($user->role) {
+            'officer' => 'officer.crime-report',
+            'encoder' => 'encoder.crime-report',
+            'admin' => 'admin.crime-report',
+            default => abort(403),
+        };
+
         //yo future me add uhh address, location, location is uhh geometry apparently xD idk where to get that doe ask kerv - Yeah bro Im doing it
-        Crime::create($validated);
+        DB::transaction(function() use($validated) {
+            $crime = Crime::create($validated);
+            // Add the report id using hte date identifier and its number during the printing, so every report is special
+            $crime->update([
+                'report_id' => 'CR-' . $crime->created_at->format('Ymd') . '-' .str_pad($crime->id, 6, '0', STR_PAD_LEFT),
+            ]);
+        });
 
         return redirect()
-            ->route('encoder.dashboard')
-            ->with('success', 'Crime report submitted successfully!');
+            ->route($view)
+            ->with('success', 'Crime Report Submitted Successfully!');
     }
 
     /**
