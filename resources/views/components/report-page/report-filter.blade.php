@@ -1,5 +1,5 @@
 @props(['crimeCategories'])
-
+{{--! Add action to the one managing the fetch --}}
 <form method="GET">
     <div class="flex gap-3">
         <div class="relative w-90">

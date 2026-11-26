@@ -17,8 +17,9 @@
 
     <tbody>
         @foreach($crimes as $crime)
-            <tr class="group hover:bg-base-200/50 transition-colors duration-150">
-
+            <tr
+                class="cursor-pointer group hover:bg-base-200/50 transition-colors duration-150"
+            >
                 <td class="font-semibold whitespace-nowrap align-middle">
                     {{ $crime['report_id'] }}
                 </td>
@@ -29,6 +30,7 @@
                         data-tip="{{ $crime['reported_by'] }}"
                     >
                         <span class="block truncate whitespace-nowrap">
+                            {{-- change this to use the relation to the user model: {{ $crime->user->name : " -- "}} --}}
                             {{ $crime['reported_by'] }}
                         </span>
                     </span>

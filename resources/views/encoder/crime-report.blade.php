@@ -1,6 +1,7 @@
 @php
     $crimes = [
         [
+            'id' => 1,
             'report_id' => 'CR-2026-0001',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Theft',
@@ -10,6 +11,7 @@
             'status' => 'Ongoing',
         ],
         [
+            'id' => 2,
             'report_id' => 'CR-2026-0002',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Robbery',
@@ -19,6 +21,7 @@
             'status' => 'Ongoing',
         ],
         [
+            'id' => 3,
             'report_id' => 'CR-2026-0003',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Physical Injury',
@@ -28,6 +31,7 @@
             'status' => 'Resolved',
         ],
         [
+            'id' => 4,
             'report_id' => 'CR-2026-0004',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Burglary',
@@ -37,6 +41,7 @@
             'status' => 'Ongoing',
         ],
         [
+            'id' => 5,
             'report_id' => 'CR-2026-0005',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Illegal Drugs',
@@ -46,6 +51,7 @@
             'status' => 'Under Investigation',
         ],
         [
+            'id' => 6,
             'report_id' => 'CR-2026-0006',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Theft',
@@ -55,6 +61,7 @@
             'status' => 'Ongoing',
         ],
         [
+            'id' => 7,
             'report_id' => 'CR-2026-0007',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Robbery',
@@ -64,6 +71,7 @@
             'status' => 'Resolved',
         ],
         [
+            'id' => 8,
             'report_id' => 'CR-2026-0008',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Carnapping',
@@ -73,6 +81,7 @@
             'status' => 'Ongoing',
         ],
         [
+            'id' => 9,
             'report_id' => 'CR-2026-0009',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Physical Injury',
@@ -82,6 +91,7 @@
             'status' => 'Under Investigation',
         ],
         [
+            'id' => 10,
             'report_id' => 'CR-2026-0010',
             'reported_by' => 'John Kervin M. Ganzon',
             'category' => 'Theft',
@@ -110,4 +120,5 @@
         </div>
     </div>
     <x-crime-form.crime-form />
+    {{-- <x-report-page.report-details-drawer /> --}}
 </x-authorized-layout>
