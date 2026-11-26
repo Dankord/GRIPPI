@@ -1,13 +1,4 @@
-@php
-    // Replace this array with database-fetched categories later.
-    $crimeCategories = [
-        ['id' => 1, 'name' => 'Theft'],
-        ['id' => 2, 'name' => 'Robbery'],
-        ['id' => 3, 'name' => 'Murder'],
-        ['id' => 4, 'name' => 'Physical Injury'],
-        ['id' => 5, 'name' => 'Drug-Related'],
-    ];
-@endphp
+@props(['crimeCategories'])
 
 <div class="flex flex-col items-start justify-start mb-5">
 
@@ -25,7 +16,7 @@
     >
 
     {{-- Crime Categories --}}
-    <div id="crime-category-list" class="flex flex-col w-full">
+    <div id="crime-category-list" class="flex flex-col w-full max-h-64 overflow-y-auto">
 
         @foreach ($crimeCategories as $category)
             <label

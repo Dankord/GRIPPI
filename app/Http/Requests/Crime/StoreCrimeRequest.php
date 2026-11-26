@@ -42,7 +42,7 @@ class StoreCrimeRequest extends FormRequest
             ],
             'severity' => [
                 'required',
-                'in:low,moderate,high'
+                'in:attempted,frustrated,consummated'
             ],
             'latitude' => [
                 'required',
@@ -53,6 +53,10 @@ class StoreCrimeRequest extends FormRequest
                 'required',
                 'numeric',
                 'between:-180,180'
+            ],
+            'station_id' => [
+                'required',
+                'exists:stations,id'
             ]
         ];
     }

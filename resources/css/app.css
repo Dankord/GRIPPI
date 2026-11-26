@@ -65,6 +65,18 @@
 
 @theme {
     --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+
+    --animate-fade-out: fade-out 2.0s ease-in-out forwards;
+
+        @keyframes fade-out {
+            0%, 70% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
 }
 
 html,

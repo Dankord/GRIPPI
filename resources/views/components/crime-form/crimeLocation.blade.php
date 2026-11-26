@@ -32,7 +32,7 @@
             style="height: 200px;"
         ></div>
         <div class="bg accent py-3">
-            <button class="bg-accent rounded-2xl py-2 px-4 text-sm">Confirm Incident Location</button>
+            <button type="button" id="confirm-location" class="bg-accent rounded-2xl py-2 px-4 text-sm">Confirm Incident Location</button>
         </div>
     </div>
 

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const previousLabel = document.getElementById('previous-label');
     const nextLabel = document.getElementById('next-label');
+    let isSubmitting = false;
 
     let currentStep = 0;
 
@@ -81,6 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Final validation before submission
     form.addEventListener('submit', (event) => {
+        //prevent duplicated submission
+        if(isSubmitting) {
+            event.preventDefault();
+            return
+        }
+        //validate before submitting
         if (!form.checkValidity()) {
             event.preventDefault();
 
@@ -92,10 +99,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (invalidStep) {
                     currentStep = Number(invalidStep.dataset.step);
                     updateForm();
+
+                    requestAnimationFrame(() => {
+                    invalidInput.focus();
                     invalidInput.reportValidity();
+                    });
                 }
             }
+            return;
         }
+        isSubmitting = true;
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
     });
 
     updateForm();
