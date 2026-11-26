@@ -1,7 +1,7 @@
 
 @props(['crimes'])
 <div class="overflow-x-auto w-full rounded-md">
-    <table class="table w-full">
+    <table class="table w-full" data-report-table>
         <thead class="bg-base-200">
             <tr>
                 <th class="sticky left-0 z-30 min-w-30">Report ID</th>
@@ -20,6 +20,18 @@
             @foreach($crimes as $crime)
                 <tr
                     class="cursor-pointer group"
+                    data-report-row
+
+                    data-report-id="{{ $crime->report_id ?? '--' }}"
+                    data-category="{{ $crime->crimeCategory?->name ?? 'Uncategorized' }}"
+                    data-severity="{{ $crime->severity ?? '--' }}"
+                    data-status="{{ $crime->status ?? '--' }}"
+                    data-occurred-at="{{ $crime->occurred_at?->format('M d, Y h:i A') ?? '--' }}"
+                    data-reported-by="{{ $crime->reportedBy?->name ?? '--' }}"
+                    data-station="{{ $crime->station?->name ?? '--' }}"
+                    data-address="{{ $crime->address ?? '--' }}"
+                    data-description="{{ $crime->description ?? '--' }}"
+                    data-reported-at="{{ $crime->created_at?->format('M d, Y h:i A') ?? '--' }}"
                 >
                     <td class="sticky left-0 z-20 w-52 min-w-52 max-w-52 bg-base-100 group-hover:bg-base-200/50 font-semibold whitespace-nowrap align-middle transition-colors duration-150">
                         {{ $crime->report_id ?? '--' }}
@@ -76,7 +88,7 @@
                     </td>
 
                     <td class="group-hover:bg-base-200/50 transition-colors duration-150 whitespace-nowrap align-middle">
-                        {{ \Carbon\Carbon::parse($crime->created_at ?? '--')->format('M d, Y h:i A') }}
+                        {{ $crime->created_at?->timezone('Asia/Manila')->format('M d, Y h:i A') ?? '--' }}
                     </td>
 
                     <td class="group-hover:bg-base-200/50 transition-colors duration-150 text-center align-middle">
@@ -94,8 +106,8 @@
             @endforeach
         </tbody>
     </table>
+    {{-- pagination --}}
+    <div class='origin-right'>
+        {{ $crimes->onEachSide(1)->links() }}
+    </div>
 </div>
-{{-- pagination --}}
-{{-- <div class='mt-5'>
-    {{ $crimes->links() }}
-</div> --}}
