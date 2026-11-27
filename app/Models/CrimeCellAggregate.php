@@ -33,4 +33,8 @@ class CrimeCellAggregate extends Model
     {
         return $this->belongsTo(CrimeCategory::class);
     }
+    public function station(): BelongsTo
+    {
+        return $this->belongsTo(Station::class);
+    }
 }
