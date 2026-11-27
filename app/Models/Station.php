@@ -33,9 +33,9 @@ class Station extends Model
     {
         return $this->hasMany(Crime::class);
     }
-    public function gridCells(): HasMany
+    public function crimeCellAggregate(): HasMany
     {
-        return $this->hasMany(GridCell::class);
+        return $this->hasMany(CrimeCellAggregate::class);
     }
     public function crimeTemporalAggregates(): HasMany
     {

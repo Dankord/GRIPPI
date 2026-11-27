@@ -21,10 +21,6 @@ class GridCell extends Model
         ];
     }
 
-    public function station(): BelongsTo
-    {
-        return $this->belongsTo(Station::class);
-    }
     public function crimeCellAggregates(): HasMany
     {
         return $this->hasMany(CrimeCellAggregate::class);
